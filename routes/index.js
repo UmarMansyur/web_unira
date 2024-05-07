@@ -7,4 +7,4 @@ router.get('/', (_, res) => {
 
 router.use('/fakultas', fakultas);
 
-modulee.exports = router;
+module.exports = router;

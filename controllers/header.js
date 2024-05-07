@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 module.exports = {
   showAll: async (_, res, next) => {
     try {
-      const response = await prisma.kegiatan.findMany();
+      const response = await prisma.header.findMany();
 
       if (response.length == 0) {
         return res.status(404).json({
@@ -25,7 +25,7 @@ module.exports = {
   },
   showById: async (req, res, next) => {
     try {
-      const response = await prisma.kegiatan.findUnique({
+      const response = await prisma.header.findUnique({
         where: {
           id: parseInt(req.params.id)
         }
@@ -48,24 +48,9 @@ module.exports = {
       next(error);
     }
   },
-  createKegiatan: async (req, res, next) => {
+  createHeader: async (req, res, next) => {
     try {
-
-      const exist = await prisma.kegiatan.findFirst({
-        where: {
-          judul_kegiatan: req.body.judul_kegiatan
-        }
-      });
-
-      if (exist) {
-        return res.status(400).json({
-          status: false,
-          message: 'Kegiatan already exist',
-          data: exist
-        });
-      }
-
-      const response = await prisma.kegiatan.create({
+      const response = await prisma.header.create({
         data: {
           ...req.body
         }
@@ -80,9 +65,9 @@ module.exports = {
       next(error);
     }
   },
-  updateKegiatan: async (req, res, next) => {
+  updateHeader: async (req, res, next) => {
     try {
-      const response = await prisma.kegiatan.update({
+      const response = await prisma.header.update({
         where: {
           id: parseInt(req.params.id)
         },
@@ -100,9 +85,9 @@ module.exports = {
       next(error);
     }
   },
-  deleteKegiatan: async (req, res, next) => {
+  deleteHeader: async (req, res, next) => {
     try {
-      const response = await prisma.kegiatan.delete({
+      const response = await prisma.header.delete({
         where: {
           id: parseInt(req.params.id)
         }
